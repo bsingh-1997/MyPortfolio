@@ -1,0 +1,48 @@
+.projects-section {
+  width: 100%;
+  padding-top: 50vh; /* start pin near bottom */
+  background: #111;
+}
+
+/* .project-text {
+  margin-left: 3vw;
+  margin-bottom: 2rem;
+} */
+
+.project-text {
+  position: relative;
+  margin-left: 3vw;
+  margin-bottom: 2rem;
+  z-index: 10;
+}
+
+
+
+.project-wrapper {
+  display: flex;
+  gap: 2rem;
+}
+
+.project-card img {
+  height: 40vh;
+  object-fit: cover;
+}
+
+
+
+.horizontal-scroll {
+  overflow: hidden;
+}
+
+.project-wrapper::after {
+  content: "";
+  display: block;
+  min-width: 10vw; /* adjust so last image is fully visible */
+}
+
+
+
+
+.end-space {
+  min-width: 50vw; /* empty space after last image */
+}

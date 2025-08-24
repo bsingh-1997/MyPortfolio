@@ -1,38 +1,294 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.herosec{
   display: flex;
-  flex-direction: column;
+  background-color: #0f0f0f;
+}
+
+.lets-talk-btn {
+  position: relative;
+  padding: 12px 28px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background: transparent;
+  border: 2px solid #00ffff;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 8px;
+  z-index: 1;
+  transition: color 0.3s ease;
+  width: 20vw;
+}
+
+.lets-talk-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #00ffff; /* Hover background color */
+  z-index: -1;
+  transition: left 0.4s ease;
+}
+
+.lets-talk-btn:hover::before {
+  left: 0;
+}
+
+.lets-talk-btn:hover {
+  color: #fff; /* Keep text white */
+  /* box-shadow: #00ffff; */
+  box-shadow: 0 0 15px rgba(0, 255, 242, 0.781);
+  
+}
+
+
+.btns:hover{
+  color: #00ffff;
+  /* box-shadow: 0 0 15px rgba(0, 255, 242, 0.781); */
+  transition: color 0.4s ease-in-out;
+}
+
+
+
+.heroimgg{
+  /* background-color: aliceblue; */
+  height: 70vh;
+  margin: auto;
+}
+
+
+.scroll-heading-wrapper {
+  text-align: center;
+  margin:35vh 0 ;
+  /* background-color: #00ffff; */
+}
+
+.scroll-heading {
+  display: inline; /* let them be on the same line when space allows */
+  font-size: clamp(3.5rem, 5.5vw, 5.5rem);
+  font-weight: 900;
+  color: #888;
+  margin: 0;
+  padding: 0;
+  white-space: normal; /* allows wrapping */
+}
+
+
+
+.projects-section {
+  width: 100%;
+  position: relative;
+  background: #111;
+}
+
+.project-wrapper {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.project-card {
+  flex: 0 0 auto;
+
+}
+
+.project-card img {
+  height: 50vh;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+}
+
+.loading {
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #aaa;
+  font-size: 1.2rem;
+}
+
+.tgl{
+  font-size: 2em;
+  color: fff;
+}
+
+.tech-logo{
+  height: 5vw;
+}
+.tech-logo2{
+  height: 5vw;
+}
+.tech-logo3{
+  height: 5vw;
+}
+
+
+
+/* .projects-section {
+  width: 100%;
+  padding-top: 50vh; /* start pin near bottom */
+  /* background: #111; */
+/* } */
+
+/* .project-text {
+  margin-left: 3vw;
+  margin-bottom: 2rem;
+} */
+
+/* .project-text {
+  position: relative;
+  margin-left: 3vw;
+  margin-bottom: 2rem;
+  z-index: 10;
+}
+
+
+
+.project-wrapper {
+  display: flex;
+  gap: 2rem;
+}
+
+.project-card img {
+  height: 40vh;
+  object-fit: cover;
+}
+
+
+
+.horizontal-scroll {
+  overflow: hidden;
+}
+
+.project-wrapper::after {
+  content: "";
+  display: block;
+  min-width: 10vw; /* adjust so last image is fully visible */
+/* }  */
+.loadingimg{
+  background-color: black;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
+}
+.project-card{
+  display: flex;
+  justify-content: space-between;
+  height: 40vh;
+  width: 35vw;
+  /* background-color: #4ae2e2; */
+  /* background: linear-gradient(to right, #ff5d78, #ffd2b0); */
+  background: linear-gradient(to right, #7667ff, #ffd2b0);
+  border-radius: 20px;
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+.project-card:hover {
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.8);
+} 
+.pcont{
+  display: flex;
+  gap: 2vw;
+}
+.pimg{
+  /* transform: translateY( 15vh); */
+  transform:translateY(4vh) rotate(-18deg);
+  /* width: 13vw; */
+}
+.emailform{
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  gap: 5vh;
+}
+.resume{
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  height: 6vh;
+  align-items: center;
+  margin: 5vh 0 ;
+}
+.resumebtn{
+  padding: 6px 20px;
+  background-color: #0f0f0f;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 2px solid cyan;
+  width: 15vw;
+}
+.button{
+  display: flex;
+margin-bottom: 3vh;
+margin-top: 3vh;
+gap: 2vw;
+}
+@media screen and (max-width:768px) {
+  .button{
+    gap: 5vw;
+  }
+  .heroimgg{
+    display: none;
+  }
+  .lets-talk-btn{
+    width: 60vw;
+  }
+  .tgl{
+    font-size: 1.5em;
+  }
+  .logo-section{
+    /* background-color: #4ae2e2; */
+    flex-wrap: wrap;
+  }
+  .tech-logo{
+    height: 11vw;
+  }
+  .tech-logo2{
+    height: 14vw;
+
+  }
+  .tech-logo3{
+    height: 14vw;
+
+  }
+  .project-card{
+    width: 85vw;
+  }
+
+  .pcont {
+  display: flex;
+  gap: 5vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  white-space: nowrap; /* keeps children in one row */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pcont > div {
+  flex: 0 0 auto; /* prevents shrinking so items keep width */
+}
+.emailform{
+  width: 95vw;
+}
+.resume{
+  /* background: #cc2a2a; */
+}
+.resume h1{
+  font-size: 1.1em;
+}
+.resumebtn{
+  /* background: red; */
+  width: 55vw;
+}
+/* .a{
+  font-size: 1.1em;
+  background-color: #4ae2e2;
+
+} */
+
 }
