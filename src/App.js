@@ -1070,8 +1070,8 @@ wworking project section
 
   <h1>Download My Resume</h1>
   <a
-    href="/BsResume3.pdf"   // place resume.pdf inside public/ folder
-    download="BsResume3.pdf"
+    href="/BarinderSingh.pdf"   
+    download="BarinderSingh.pdf"
     className="lets-talk-btn resumebtn"
     
     >
