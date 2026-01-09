@@ -636,7 +636,7 @@ useEffect(() => {
 const heroscRef=useRef(null)
   const scrollToSection = (ref) => {
     gsap.to(window, {
-      duration: 1,
+      duration: 1, 
       scrollTo: { y: ref.current, offsetY: 70 }, // offset = navbar height if fixed
       ease: "power2.inOut",
     });
