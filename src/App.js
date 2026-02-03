@@ -861,6 +861,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import bscustomimage from './bscustom.png'
 import { Typewriter } from 'react-simple-typewriter';
+import emailjs from '@emailjs/browser';
+
 import { 
   Github, 
   Linkedin, 
@@ -875,7 +877,9 @@ import {
   Layers,
   Terminal,
   Database,
-  Globe
+  Globe,
+  Check,
+  Loader2
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -950,6 +954,7 @@ const Navbar = ({ scrollTo }) => {
     { name: 'Contact', id: 'contact' },
   ];
 
+
   return (
     <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'py-4 bg-glass' : 'py-6 bg-transparent'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
@@ -986,6 +991,56 @@ const App = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const marqueeRef = useRef(null);
   const letterRefs = useRef([]);
+
+
+  
+    const [isSending, setIsSending] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+  const [error, setError] = useState(null);
+  
+  const formRef = useRef();
+
+
+  
+  const sendEmail = (e) => {
+    e.preventDefault();
+    
+    if (!formRef.current) return;
+    
+    setIsSending(true);
+    setError(null);
+    
+    emailjs.sendForm(
+      'service_9c31sku',     // Your EmailJS Service ID
+      'template_0r0nx2l',    // Your EmailJS Template ID
+      formRef.current,
+      'tS5eS0D7fQfDWlnhR'    // Your EmailJS Public Key
+    )
+    .then((result) => {
+      console.log('Email sent successfully:', result.text);
+      setIsSent(true);
+      setIsSending(false);
+      
+      // Reset form
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setIsSent(false);
+      }, 5000);
+    })
+    .catch((error) => {
+      console.error('Email send failed:', error.text);
+      setError('Failed to send message. Please try again or email me directly.');
+      setIsSending(false);
+    });
+  };
+
+
+
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1253,7 +1308,7 @@ const App = () => {
         </div>
       </section>
 
-      <section id="contact" className="py-40 bg-[#0a0a0a] relative">
+      {/* <section id="contact" className="py-40 bg-[#0a0a0a] relative">
         <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-[#00f5ff]/5 rounded-full blur-[200px] pointer-events-none" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-24">
@@ -1304,7 +1359,138 @@ const App = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+
+<section id="contact" className="py-40 bg-[#0a0a0a] relative">
+      <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-[#00f5ff]/5 rounded-full blur-[200px] pointer-events-none" />
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-24">
+          <div className="scroll-fade">
+            <span className="text-[#00f5ff] uppercase tracking-[0.5em] font-black text-xs mb-8 block">Inquiries</span>
+            <h2 className="text-6xl md:text-8xl font-black font-space mb-12 leading-[0.9] tracking-tighter uppercase">Let's <br />Collaborate.</h2>
+            
+            {/* Success Message */}
+            {isSent && (
+              <div className="mb-10 p-6 bg-[#00f5ff]/10 border border-[#00f5ff]/30 rounded-3xl animate-in slide-in-from-bottom">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-[#00f5ff] rounded-full flex items-center justify-center">
+                    <Check size={24} className="text-black" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold text-lg mb-1">Message Sent!</h4>
+                    <p className="text-gray-300 text-sm">I'll get back to you within 24 hours.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Error Message */}
+            {error && (
+              <div className="mb-10 p-6 bg-red-500/10 border border-red-500/30 rounded-3xl">
+                <p className="text-red-400">{error}</p>
+                <p className="text-gray-400 text-sm mt-2">
+                  You can also email me directly at: barindersingh1997@gmail.com
+                </p>
+              </div>
+            )}
+            
+            <div className="space-y-12">
+              <div className="flex gap-8 items-start">
+                <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center text-[#00f5ff] shadow-[0_0_30px_rgba(0,245,255,0.1)]">
+                  <Mail size={32} />
+                </div>
+                <div>
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2">Email Me</h4>
+                  <p className="text-2xl font-bold font-space text-white">barindersingh1997@gmail.com</p>
+                </div>
+              </div>
+              <div className="flex gap-8 items-start">
+                <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center text-[#00f5ff] shadow-[0_0_30px_rgba(0,245,255,0.1)]">
+                  <Globe size={32} />
+                </div>
+                <div>
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2">Based In</h4>
+                  <p className="text-2xl font-bold font-space text-white">Global Remote</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="scroll-fade bg-[#111] p-12 md:p-16 rounded-[4rem] border border-white/5 shadow-3xl backdrop-blur-3xl relative">
+            <div className="absolute top-0 right-0 w-48 h-48 bg-[#00f5ff]/5 blur-[100px] rounded-full" />
+            
+            {/* Update the form with ref and onSubmit */}
+            <form ref={formRef} onSubmit={sendEmail} className="space-y-10 relative z-10">
+              <div className="space-y-4">
+                <label htmlFor="name" className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-2">Your Name</label>
+                <input 
+                  id="name"
+                  name="user_name"  // EmailJS field name
+                  type="text" 
+                  placeholder="John Wick" 
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-10 py-6 outline-none focus:border-[#00f5ff] transition-all text-white font-medium placeholder:text-gray-700" 
+                  required
+                  disabled={isSending}
+                />
+              </div>
+              
+              <div className="space-y-4">
+                <label htmlFor="email" className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-2">Your Email</label>
+                <input 
+                  id="email"
+                  name="user_email"  // EmailJS field name
+                  type="email" 
+                  placeholder="john@continental.com" 
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-10 py-6 outline-none focus:border-[#00f5ff] transition-all text-white font-medium placeholder:text-gray-700" 
+                  required
+                  disabled={isSending}
+                />
+              </div>
+              
+              <div className="space-y-4">
+                <label htmlFor="message" className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-2">Project Details</label>
+                <textarea 
+                  id="message"
+                  name="message"  // EmailJS field name
+                  rows={4} 
+                  placeholder="Tell me about the magic we're building..." 
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-10 py-6 outline-none focus:border-[#00f5ff] transition-all text-white font-medium resize-none placeholder:text-gray-700"
+                  required
+                  disabled={isSending}
+                />
+              </div>
+              
+              <button 
+                type="submit"  // Changed from type="button" to type="submit"
+                disabled={isSending}
+                className={`w-full py-7 text-black font-black uppercase tracking-[0.4em] rounded-3xl transition-all duration-700 flex items-center justify-center gap-4 group shadow-[0_20px_40px_-15px_rgba(0,245,255,0.4)] ${
+                  isSending 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-[#00f5ff] hover:bg-white hover:scale-[1.02]'
+                }`}
+              >
+                {isSending ? (
+                  <>
+                    <Loader2 size={20} className="animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message 
+                    <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform duration-500" />
+                  </>
+                )}
+              </button>
+              
+              {/* Optional: Privacy note */}
+              <p className="text-gray-600 text-xs text-center pt-4">
+                Your information is secure and will only be used to respond to your inquiry.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
 
       <footer className="py-24 border-t border-white/5 bg-[#0a0a0a]">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-16">
